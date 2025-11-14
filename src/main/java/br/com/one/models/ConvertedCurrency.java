@@ -4,7 +4,6 @@ package br.com.one.models;
  * 🔹 {@code ConvertedCurrency} - Classe que armazena o resultado da conversão.
  *<p>
  *     Responsável por receber os dados da conversão do ExchangeRate-API.
- *     Armazena os dados da conversão.
  *</p>
  */
 
