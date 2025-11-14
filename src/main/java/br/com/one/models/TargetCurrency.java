@@ -18,12 +18,10 @@ public class TargetCurrency extends Currency{
         this.currencyCodeTarget = targetCurrency;
     }
 
-    // Getter
     public String getCurrencyCodeTarget() {
         return currencyCodeTarget;
     }
 
-    // Setter
     public void setCurrencyCodeTarget(String currencyCodeTarget) {
         this.currencyCodeTarget = currencyCodeTarget;
     }
