@@ -10,15 +10,20 @@ package br.com.one.models;
 public class TargetCurrency extends Currency{
     private String currencyCodeTarget;
 
-
+    /**
+     * 🔹Construtor completo da classe TergetCurrency
+     *
+     */
     public TargetCurrency(String targetCurrency) {
         this.currencyCodeTarget = targetCurrency;
     }
 
+    // Getter
     public String getCurrencyCodeTarget() {
         return currencyCodeTarget;
     }
 
+    // Setter
     public void setCurrencyCodeTarget(String currencyCodeTarget) {
         this.currencyCodeTarget = currencyCodeTarget;
     }
