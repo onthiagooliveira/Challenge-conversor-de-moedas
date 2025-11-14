@@ -23,6 +23,9 @@ public class Currency {
         this.country = country;
     }
 
+    public Currency() {
+    }
+
     public String getCurrencyCode() {
         return currencyCode;
     }
@@ -38,10 +41,12 @@ public class Currency {
     @Override
     public String toString() {
         return String.format("""
-                Dados da moeda \n
-                Cod. Moeda      '%s'
-                Nome Moeda       %s
-                País             %s
-                """, currencyCode, currencyName, country);
+                
+                Cod. Moeda  '%s'
+                Nome Moeda   %s
+                País         %s
+                
+                """
+                , currencyCode, currencyName, country);
     }
 }

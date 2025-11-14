@@ -1,5 +1,9 @@
 package br.com.one.main;
 
+import br.com.one.controller.CurrencyConverterService;
+import br.com.one.controller.IntegrationExchangeRateAPI;
+import br.com.one.interfaces.DisplayMenu;
+import br.com.one.models.ConvertedCurrency;
 import br.com.one.models.Currency;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -10,7 +14,10 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
+
 
 /**
  * A classe {@code Main} é o ponto de entrada da aplicação.
@@ -24,16 +31,9 @@ import java.util.List;
  */
 
 
-public class Main {
-    /**
-     * O método principal que inicia a execução da aplicação.
-     *
-     * <p>Configura o objeto Gson para impressão formatada, lê o conteúdo
-     * do arquivo "allCurrencies.json", desserializa o JSON para uma
-     * {@code List<Currency>} e imprime algumas informações no console.</p>
-     *
-     */
-    public static void main(String[] args) {
+public class Main implements DisplayMenu {
+
+    public static void main(String[] args) throws IOException {
 
         // Cria uma instância de Gson configurada para imprimir JSON formatado (Pretty Printing)
         Gson gson = new GsonBuilder()
@@ -44,7 +44,7 @@ public class Main {
             // Lê o arquivo JSON como uma ‘String’. O arquivo está no diretório raiz do projeto
             String jsonString = Files.readString(Path.of("allCurrencies.json"));
 
-            // Define o tipo de Objeto: Lista de Currency -> List<Currency>
+            // Define o tipo de Objeto: Lista de Currency → List<Currency>
             // Este é um passo necessário para que Gson saiba o tipo genérico correto
             // para a desserialização (devido à eliminação de tipo em Java)
             Type listType = new TypeToken<List<Currency>>() {}.getType();
@@ -52,20 +52,69 @@ public class Main {
             // Desserializa a ‘String’ JSON para uma lista de objetos Currency
             List<Currency> localizedCurrencies = gson.fromJson(jsonString, listType);
 
-            // Imprime uma mensagem de sucesso
-            System.out.println("Moedas lidas com sucesso: ");
+            // Organizan a lista alfabeticamente
+            localizedCurrencies.sort(Comparator.comparing(Currency::getCurrencyCode));
 
-            // Imprime um elemento específico da lista para demonstração
-            System.out.println("\nPrimeira Moeda");
-            System.out.println(localizedCurrencies.get(55));
 
+            do {
+                // Cria o vínculo com a API
+                IntegrationExchangeRateAPI api = new IntegrationExchangeRateAPI();
+
+                // Cria o serviço ce conversão usando a API
+                CurrencyConverterService service = new CurrencyConverterService(api);
+
+                // Solicita a moeda de origem e a quantia a ser convertida
+                System.out.print(DisplayMenu.displayMenuOfOptions());
+                Scanner sc = new Scanner(System.in);
+                int inputUser = sc.nextInt();
+                sc.nextLine();
+
+                switch (inputUser) {
+                    case 1:
+                        for (Currency c : localizedCurrencies) {
+                            System.out.println(c);
+                        }
+                        break;
+
+                    case 2:
+                        System.out.println("Converter Moeda");
+                        System.out.println("Informe o código da moeda de origem:");
+                        String currencyCode = sc.nextLine().toUpperCase();
+
+                        System.out.println("Informe o código da moeda destino:");
+                        String currencyCodeTarget = sc.nextLine().toUpperCase();
+
+                        System.out.println("Informe o valor:");
+                        double amount = sc.nextDouble();
+                        sc.nextLine(); // limpa BUFFER
+
+                        // C hama o método convert()
+                        ConvertedCurrency resultFinal = service.convert(currencyCode, currencyCodeTarget, amount);
+
+                        // Exibe o resultado
+                        System.out.printf("""
+                        
+                        Resultado da Conversão
+                                %s → %s
+                                 %.2f
+                        
+                        """, currencyCode, currencyCodeTarget, resultFinal.conversion_result());
+                        break;
+
+                    case 0:
+                        System.out.println("Encerrando...");
+                        return;
+
+                    default:
+                        System.out.println("Opção inválida!");
+                    }
+            } while (true);
 
         } catch (IOException e) {
             // Captura e trata exceções de I/O (por exemplo, arquivo não encontrado).
             System.err.println("Erro ao ler o arquivo jSON: " + e.getMessage());
             e.printStackTrace();
         }
-
-
     }
+
 }
