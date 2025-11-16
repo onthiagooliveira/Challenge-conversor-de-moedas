@@ -6,7 +6,7 @@ em parceria com a Alura.
 O objetivo principal foi aplicar e consolidar conhecimentos de **Java** e **Orientação a Objetos** em um cenário prático, desenvolvendo
 uma aplicação que consome uma **API externa** de taxas de câmbio para realizar conversões monetárias em tempo real.
 
-A api utilizada foi a Exchange Rate API, https://www.exchangerate-api.com/, aproveito este espaço para deixar meu agradecimento pela disponibilização.
+A api utilizada foi a Exchange Rate API, https://www.exchangerate-api.com/, aproveito este espaço para agradecer pela disponibilização.
 
 A aplicação foi estruturada seguindo boas práticas de código e modularidade, separando as responsabilidades de integração (**API**),
 lógica de negócio (**Service**) e modelo de dados (**Models**).
