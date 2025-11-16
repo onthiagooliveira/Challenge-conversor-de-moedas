@@ -1,4 +1,4 @@
-# <img width="80" height="80" alt="image" src="https://github.com/user-attachments/assets/d4c61896-a62a-4f96-9ee5-03871ec5f2b1" /> Challenge ONE: Conversor de Moedas
+# <img width="32" height="32" alt="image" src="https://github.com/user-attachments/assets/ba528d92-4040-4a2d-8bba-edbd363fa816" /> Challenge ONE: Conversor de Moedas
 
 Esta é a solução desenvolvida por mim para o **Desafio de Conversão de Moedas** proposto pelo programa **ONE (Oracle Next Education)**
 em parceria com a Alura.
