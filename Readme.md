@@ -45,4 +45,8 @@ O conversor é capaz de:
 
 ### Demonstração:
 
+* Lista de moedas disponíveis e suas informações
 ![lista-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/a5009977-4546-4b02-ba4f-d6a5c323a78e)
+
+* Conversão de moeda
+* 
