@@ -52,5 +52,7 @@ O conversor é capaz de:
 ![conversao-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/0815e338-32f8-47f7-a24b-daa5d8554002)<br>
 
 * Buscar cotação por código<br>
+![buscarcotacao](https://github.com/user-attachments/assets/033e0274-5e18-4cb3-82b0-7efa02c66ab7)
+
 
 
